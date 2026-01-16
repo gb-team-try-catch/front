@@ -296,6 +296,7 @@ address, caption, em {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 15px;
     border: 1px solid #d9dfea;
     text-align: center;
     height: 100%;
