@@ -27,9 +27,13 @@ subNavLis.forEach((li) => {
 });
 
 // corporate-name
-document.addEventListener("DOMContentLoaded", (e) => {
-    // 로그인 검사할 방법 모름
-    if (true) {
-        rightMenu.classList.add("active");
-    }
-});
+// document.addEventListener("DOMContentLoaded", (e) => {
+//     // 로그인 검사할 방법 모름
+//     if (true) {
+//         rightMenu.classList.add("active");
+//     }
+// });
+
+console.log(
+    document.querySelector(".right-menu.logged-in .notificatioin .bell")
+);

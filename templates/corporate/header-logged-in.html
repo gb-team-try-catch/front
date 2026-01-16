@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>header</title>
+    <title>header logged-in</title>
     <link rel="stylesheet" href="/static/css/corporate/header.css">
 </head>
 <body>
@@ -20,13 +20,10 @@
                     <!-- 로그인/회원가입 메뉴 -->
                     <ul class="top-menu-list clearfix">
                         <li>
-                            <a href="">회원가입</a>
-                        </li>
-                        <li>
                             <a href="">고객센터</a>
                         </li>
-                        <li class="devGoLogin">
-                            <a href="">로그인</a>
+                        <li class="">
+                            <a href="">로그아웃</a>
                         </li>
                     </ul>
                 </div>
@@ -104,8 +101,17 @@
                     </div>
     
                     <!-- 기업 이름(mypage) -->
-                    <div class="right-menu">
+                    <div class="right-menu logged-in">
                         <ul class="right-menu-list clearfix">
+                            <li class="notification">
+                                <a href="" class="bell"></a>
+                                <div class="notification-modal active">
+                                    <div class="notification-modal-content">
+                                        <div class="contents"></div>
+                                    </div>
+                                </div>
+                                <!-- javascript: click 시, active 추가(모달) -->
+                            </li>
                             <li>
                                 <a href="">기업 이름</a>
                             </li>
