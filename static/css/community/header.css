@@ -1320,6 +1320,6 @@ i.emoji32_headset, i.line_line_arrow_right {
     text-decoration: underline;
 }
 
-/* .jkNavDimm.on {
+.jkNavDimm.on {
     display: block !important;
-} */
+}
