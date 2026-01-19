@@ -65,13 +65,12 @@ const bookMarkLayer = document.querySelector(
 
 buttonBookMark.addEventListener("click", (e) => {
     if (!buttonBookMark.classList.contains("on")) {
-        bookMarkLayer.style.display = "block";
-        bookMarkLayer.style.transition = "opacity 0.6s";
-        bookMarkLayer.style.transition = "visibility 0.6s";
-
+        bookMarkLayer.style.opacity = "1";
         setTimeout(() => {
-            bookMarkLayer.style.display = "none";
-        }, 1000);
+            bookMarkLayer.style.opacity = "0";
+        }, 500);
+    } else {
+        bookMarkLayer.style.opacity = "0";
     }
     buttonBookMark.classList.toggle("on");
 });
