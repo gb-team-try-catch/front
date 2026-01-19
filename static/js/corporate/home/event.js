@@ -9,7 +9,6 @@ const serviceNextButton = document.querySelector(
 const servicePrevButton = document.querySelector(
     ".service-modal .swiper-button-prev",
 );
-const serviceSwiperButtons = [serviceNextButton, servicePrevButton];
 let serviceCount = 0;
 
 serviceSwiperWrapper.style.width = `${8 * 730}px`;
@@ -29,23 +28,9 @@ let noticeCount = 0;
 
 noticeBanner.style.height = "260px";
 
-setInterval(() => {
-    noticeCount++;
-    noticeBanner.style.transform = `translate(0, -${52 * noticeCount}px)`;
-    noticeBanner.style.transition = `transform 0.3s`;
-
-    if (noticeCount === 4) {
-        setTimeout(() => {
-            noticeBanner.style.transform = `translate(0px)`;
-            noticeBanner.style.transition = `transform 0s`;
-        }, 300);
-        noticeCount = 0;
-    }
-}, 3500);
-
 // 이벤트
 // 이전/다음 버튼
-serviceSwiperButtons.forEach((button) => {
+[serviceNextButton, servicePrevButton].forEach((button) => {
     button.addEventListener("click", (e) => {
         servicePrevButton.classList.remove("swiper-button-disabled");
         serviceNextButton.classList.remove("swiper-button-disabled");
@@ -54,16 +39,12 @@ serviceSwiperButtons.forEach((button) => {
             serviceCount++;
             serviceSwiperWrapper.style.transform = `translate(-${730 * serviceCount}px)`;
 
-            console.log(serviceCount);
-
             if (serviceCount === 7) {
                 serviceNextButton.classList.add("swiper-button-disabled");
             }
         } else {
             serviceCount--;
             serviceSwiperWrapper.style.transform = `translate(-${730 * serviceCount}px)`;
-
-            console.log(serviceCount);
 
             if (serviceCount === 0) {
                 servicePrevButton.classList.add("swiper-button-disabled");
@@ -87,9 +68,9 @@ serviceButtonList.forEach((button) => {
         serviceNextButton.classList.remove("swiper-button-disabled");
 
         if (serviceCount === 0) {
-            serviceSwiperButtons[1].classList.add("swiper-button-disabled");
+            servicePrevButton.classList.add("swiper-button-disabled");
         } else if (serviceCount === 7) {
-            serviceSwiperButtons[0].classList.add("swiper-button-disabled");
+            serviceNextButton.classList.add("swiper-button-disabled");
         }
 
         serviceSwiperWrapper.style.transform = `translate(-${serviceCount * 730}px)`;
@@ -97,3 +78,18 @@ serviceButtonList.forEach((button) => {
         serviceModal.classList.add("active");
     });
 });
+
+// 공지사항
+setInterval(() => {
+    noticeCount++;
+    noticeBanner.style.transform = `translate(0, -${52 * noticeCount}px)`;
+    noticeBanner.style.transition = `transform 0.3s`;
+
+    if (noticeCount === 4) {
+        setTimeout(() => {
+            noticeBanner.style.transform = `translate(0px)`;
+            noticeBanner.style.transition = `transform 0s`;
+        }, 300);
+        noticeCount = 0;
+    }
+}, 3500);
