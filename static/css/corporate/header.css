@@ -324,78 +324,94 @@ address, caption, em {
     line-height: 18px;
 }
             /* 알림 있을 때 */
-.notification .notification-menu .notification-menu-body .notification-list.active {
-    display: block;
-}
-.notification .notification-menu .notification-menu-body .notification-list {
-    display: none;
+ .notification .list-notification-container {
     overflow: hidden;
-    padding: 6px 6px 10px 10px;
-    width: 100%;
+    padding: 0 10px 40px 16px;
 }
-.notification .notification-menu .notification-menu-body .notification-list ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* gap: 15px; */
-    /* border: 1px solid #d9dfea; */
-    text-align: center;
-    height: 100%;
+.notification .header-date {
+    height: 54px;
+    padding: 24px 0 8px;
+    font-size: 0;
 }
-.notification-list ul li {
-    box-sizing: border-box;
-    width: 100%;
-    float: left;
-    padding: 10px;
-    border-bottom: 1px solid #d9dfea;
-    cursor: pointer;
-}
-.notification-list ul li:last-child {
-    border-bottom: 0;
-}
-.notification-list ul li .sender {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-.notification-list ul li .sender .sender-name {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    font-weight: 600;
-    line-height: 20px;
-    color: #000;
-    font-size: 16px;
-    padding-bottom: 1px;
-}
-.notification-list ul li .sender .sender-name::before {
-    content: "From.";
+.notification .header-date-item {
     display: inline-block;
-    padding-right: 5px;
+    position: relative;
+    margin-left: 4px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #171717;
+    /* vertical-align: top; */
+    font-size: 16px;
 }
-.notification-list ul li .sender div {
-    display: flex;
-    gap: 5px;
-    line-height: 17px;
+.notification .notification-item:last-child {
+    margin-bottom: 0;
 }
-.notification-list ul li .sender span.new-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ff4f4f;
-    border-radius: 2px;
-    padding-top: 0;
-    color: #fff;
-    font-size: 10px;
-    width: 30px;
-    height: 16px;
-    margin-bottom: 1px;
-}
-.notification-list ul li .preview {
+.notification .notification-item {
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 15px 0 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    background-color: #fff;
+}
+.notification .notification-header {
+    margin-bottom: 8px;
+    padding: 0 15px;
+    font-size: 0;
+}
+.notification .notification-header-item {
+    display: inline-block;
+    line-height: 20px;
+    color: #6a6a6a;
+    font-size: 13px;
+}
+.notification .notification-header .date {
+    margin-left: 4px;
+    font-size: 13px;
+    letter-spacing: 0;
+}
+.notification .notification-body {
+    padding: 0 15px 16px;
+}
+.notification .notification-title {
+    font-weight: 700;
+    line-height: 24px;
+    color: #171717;
+    font-size: 16px;
+}
+.notification .notification-footer .buttons {
+    overflow: hidden;
+    /* padding: 0; */
+    border-radius: 0 0 8px 8px;
+    font-size: 0;
+}
+.notification .notification-footer .buttons, .notification .notification-footer .message {
+    height: 43px;
+    border-top: 1px solid #e8e8e8;
+}
+.notification .notification-footer .buttons .button {
+    display: inline-block;
+    width: 100%;
+    height: 42px;
+    padding: 11px 0 0;
+    border: 0;
+    background-color: #fff;
+    font-weight: 400;
+    line-height: 20px;
+    color: #171717;
+    text-align: center;
+    vertical-align: top;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0;
+}
+.notification .notification-item.active .notification-footer .buttons .button {
+    background-color: #f8f8f8;
+}   
+.notification .notification-footer .buttons .button:hover {
+    color: #666 !important;
 }
 
 /* sub-menu(모달) */
@@ -597,6 +613,9 @@ address, caption, em {
     font-size: 16px;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 10px;
+    display: flex;
+    letter-spacing: 0.5px;
+    gap: 10px;
 }
 .common-modal.notification-modal .modal-contents .swiper-wrapper .swiper-slide .content {
     overflow-y: auto;

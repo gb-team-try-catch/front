@@ -6,14 +6,13 @@ const subMenu = document.querySelector(".all-menu-modal");
 // sub-nav
 const subNavLis = document.querySelectorAll(".left-menu-list li");
 
-// corporate-name
-const rightMenu = document.querySelector(".right-menu");
-
 // notification-menu
 const bell = document.querySelector(".bell");
 const notificationMenu = document.querySelector(".notification-menu");
 const noNotification = document.querySelector(".no-notification");
-const notificationList = document.querySelector(".notification-list");
+const notificationContainer = document.querySelector(
+    ".list-notification-container",
+);
 
 const notificationCheck = false;
 
@@ -34,23 +33,15 @@ subNavLis.forEach((li) => {
     });
 });
 
-// corporate-name
-// document.addEventListener("DOMContentLoaded", (e) => {
-//     // 로그인 검사할 방법 모름
-//     if (true) {
-//         rightMenu.classList.add("active");
-//     }
-// });
-
 // notification-menu
 bell.addEventListener("click", (e) => {
     notificationMenu.classList.toggle("active");
 
     if (notificationCheck) {
-        notificationList.classList.remove("active");
+        notificationContainer.classList.remove("active");
         noNotification.classList.add("active");
     } else {
         noNotification.classList.remove("active");
-        notificationList.classList.add("active");
+        notificationContainer.classList.add("active");
     }
 });
