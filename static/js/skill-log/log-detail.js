@@ -380,6 +380,10 @@ addFiles.forEach((addFile) => {
 
         reader.addEventListener("load", (e) => {
             const path = e.target.result;
+            if (!path.includes("image")) {
+                alert("이미지 파일만 올릴 수 있습니다.");
+                return;
+            }
 
             const imgPathInput = writeBoxWrap.querySelector(
                 "#Img_Path, [id*='Img_Path']",
