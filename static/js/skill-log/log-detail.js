@@ -527,21 +527,6 @@ deleteReplyOfButtons.forEach((deleteButton) => {
         }
     });
 });
-deleteReplyButtons.forEach((deleteButton) => {
-    deleteButton.addEventListener("click", (e) => {
-        // confirm은 확인(true) 또는 취소(false)를 반환합니다.
-        const isDelete = confirm("정말로 댓글을 삭제 하시겠습니까?");
-
-        if (isDelete) {
-            // 사용자가 '확인'을 눌렀을 때만 실행
-            alert("삭제되었습니다."); // (선택사항) 삭제 완료 알림
-            location.href = "../skill-log/log-detail.html"; // 페이지 이동
-        } else {
-            // 사용자가 '취소'를 누르면 아무 일도 일어나지 않음 (함수 종료)
-            return;
-        }
-    });
-});
 
 // 댓글 수정(로그인)
 const modifyAnswerButtons = document.querySelectorAll(

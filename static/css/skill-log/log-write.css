@@ -269,10 +269,6 @@ h1, h2, h3, h4, h5, h6 {
     vertical-align: middle;
 }
 
-.tag-input.focus::before {
-    color: #333;
-}
-
 .tooltip-layer {
     display: none;
     z-index: 2;
@@ -1640,18 +1636,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tag-input {
-    position: relative;
-    border-bottom: solid 1px #edeef0;
-}
-
-.tag-input::before {
-    content: "#";
-    font-size: 15px;
-    letter-spacing: 0px;
-    color: #aaa;
-    position: absolute;
-    top: 21px;
-    left: 26px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    border-bottom: 1px solid #edeef0
 }
 
 .tag-input input {
@@ -1781,6 +1770,35 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
     display: block;
     clear: both;
+}
+
+#devTags {
+    flex: 1;
+    min-width: 50px;
+    height: 64px;
+    font-size: 15px;
+    letter-spacing: 0px;
+    color: #333;
+    padding: 15px 25px 15px 35px;
+    border: 0 none;
+    box-sizing: border-box;
+    outline: none;
+    line-height: 43px;
+}
+
+.tagDiv {
+    display: inline-block;  
+    font-size: 17px;
+    border: 1px solid #a8abb1;
+    color: #666;
+    border-radius: 45px;
+    padding: 4px 8px;
+    white-space: nowrap;
+}
+
+.tagDiv:hover {
+    background-color: #7BA882;
+    color: white;
 }
 
 .side-navigation .navi-list-area .sideNavLow .sideNavList li a:hover {

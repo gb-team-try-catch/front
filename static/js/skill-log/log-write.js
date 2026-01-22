@@ -138,6 +138,7 @@ attachButton.addEventListener("click", (e) => {
     if (attachButton.classList.contains("on")) {
         linkLayer.classList.remove("open");
         iconBtnLayerOpen.classList.remove("on");
+        attachButton.classList.remove("on");
 
         textarea.innerHTML += `
             <div class="attach-wrap">
@@ -160,7 +161,6 @@ attachButton.addEventListener("click", (e) => {
 
     textarea.addEventListener("click", (e) => {
         if (e.target.classList.contains("remove-button")) {
-            console.log("들어옴");
             e.target.closest(".attach-wrap").remove();
         }
     });
@@ -219,15 +219,65 @@ textarea.addEventListener("click", (e) => {
 });
 
 // 태그 입력
-const addTag = document.querySelector("fieldset div #devTags");
+const addTag = document.querySelector("#devTags");
 const inputTag = document.querySelector(".tag-input");
+const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 
-addTag.addEventListener("input", (e) => {
-    inputTag.classList.add("focus");
+addTag.addEventListener("keyup", (e) => {
+    const tag = addTag.value.trim();
+
+    if (e.key === "Enter" && tag !== "") {
+        // span 태그 생성
+        if (regExp.test(tag)) {
+            alert("특수문자는 입력 못해요");
+            addTag.value = "";
+            return;
+        }
+        const span = document.createElement("span");
+        span.className = "tagDiv";
+        span.textContent = `#${tag}`;
+
+        // input 앞에 span 삽입
+        inputTag.insertBefore(span, addTag);
+
+        // input 값 초기화
+        addTag.value = "";
+
+        // 너비 재조정
+        adjustInputWidth();
+    }
 });
 
-addTag.addEventListener("blur", (e) => {
-    if (!addTag.value) {
-        inputTag.classList.remove("focus");
+function adjustInputWidth() {
+    const tags = document.querySelectorAll(".tagDiv");
+
+    // 모든 태그의 총 너비 계산
+    let tagsWidth = 0;
+    tags.forEach((tag) => {
+        tagsWidth += tag.offsetWidth + 10;
+    });
+
+    // input 너비 조정
+    const containerWidth = inputTag.offsetWidth;
+    const remainingWidth = containerWidth - tagsWidth - 60;
+
+    addTag.style.width = Math.max(remainingWidth, 50) + "px";
+}
+
+// 태그 삭제
+inputTag.addEventListener("click", (e) => {
+    if (e.target.classList.contains("tagDiv")) {
+        e.target.remove();
+    }
+});
+
+// 등록하기 버튼
+const admitButton = document.querySelector(".btnQuestion.devQnaWriteButton");
+
+admitButton.addEventListener("click", (e) => {
+    confirm("등록하시겠습니까?");
+    if (confirm) {
+        alert("등록되었습니다.");
+        location.href = "";
     }
 });
