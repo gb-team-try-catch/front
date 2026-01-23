@@ -677,7 +677,7 @@ const writeTitle = document.querySelector(".jkSchInp.devQnaWriteTitle");
 const writeContent = document.querySelector(".devQnaWriteCntnt.custom-editor");
 
 admitButton.addEventListener("click", (e) => {
-    if (!confirm("등록하시겠습니까?")) {
+    if (!confirm("수정 하시겠습니까?")) {
         e.preventDefault();
     }
     if (!writeTitle.value) {
@@ -687,7 +687,7 @@ admitButton.addEventListener("click", (e) => {
         alert("내용을 입력해주세요");
         e.preventDefault();
     } else {
-        alert("등록되었습니다.");
+        alert("수정 완료되었습니다.");
         location.href = "";
     }
 });
