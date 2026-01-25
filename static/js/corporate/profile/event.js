@@ -1,6 +1,7 @@
 NodeList.prototype.filter = Array.prototype.filter;
 NodeList.prototype.map = Array.prototype.map;
 NodeList.prototype.join = Array.prototype.join;
+NodeList.prototype.flat = Array.prototype.flat;
 
 // 로고 업로드 모달
 //      열기
@@ -16,7 +17,7 @@ const logoDeleteCloseButton = document.getElementById("devCloseDelLayer");
 
 // input
 const companyBasicinputs = document
-    .querySelectorAll("input")
+    .querySelectorAll(".artCoBasic input")
     .filter((input) => !input.closest(".addrMngWrap"));
 const textareas = document.querySelectorAll("textarea");
 
@@ -75,31 +76,32 @@ const industryInput = document.getElementById("Industry_Code");
 const industryResultSpan = document.getElementById("Industry_Name");
 
 //      temp & 기본값 설정
+// setIndustrySelectClass();
+
 let tempIndustryType = document.querySelector(".tbPart .devPartCtgr.on button");
 let tempIndustryPartList = document.querySelector(".tbPart .devPartList.devOn");
 let tempIndustryPartItem = document.querySelector(
     ".tbPart .devPartList .devPartItem.on button",
 );
-let tempIndustryPartItemValue = tempIndustryPartItem.textContent;
+let tempIndustryPartItemValue = tempIndustryPartItem?.textContent;
 
-//      기본값 설정(수정필요)
-tempIndustryPartList && (tempIndustryPartList.style.display = "block");
+//      기본값 설정
+// tempIndustryPartList && (tempIndustryPartList.style.display = "block");
 
-tempIndustryPartItem &&
-    (industryInput.value =
-        tempIndustryPartItem.closest(".devPartItem").dataset.part);
+// tempIndustryPartItem &&
+//     (industryInput.value =
+//         tempIndustryPartItem.closest(".devPartItem").dataset.part);
 
-industryInput.value &&
-    (industryResultSpan.textContent = tempIndustryPartItemValue);
+// industryInput.value &&
+//     (industryResultSpan.textContent = tempIndustryPartItemValue);
 
-if (tempIndustryPartItem) {
-    industryInput.value =
-        tempIndustryPartItem.closest(".devPartItem").dataset.part;
-    if (industryInput.value) {
-        industryResultSpan.textContent = tempIndustryPartItemValue;
-        industryResultSpan.closest(".elWrap").classList.add("ok");
-    }
-}
+// if (tempIndustryPartItem) {
+//     industryInput.value =
+//         tempIndustryPartItem.closest(".devPartItem").dataset.part;
+//     if (industryInput.value) {
+//         industryResultSpan.textContent = tempIndustryPartItemValue;
+//     }
+// }
 
 // 회사주소
 //      국내
@@ -127,6 +129,54 @@ const historyTextareaLayer = document.querySelector(
 const overviewTextareaLayer = document.querySelector(
     ".artCoOverview .mtcTxaType",
 );
+
+// 사진 업로드
+const photoUploadButton = document.querySelector(".button-photo-upload");
+const photoUploadLayer = document.getElementById("devMngPhotoWrap");
+
+const photoUploadCloseButton = document.querySelector(
+    ".mtcBtnPopClose.devClosePhotoLive",
+);
+const photoDelegatorButton = document.getElementById("devSelectPhotoDelegator");
+const photoSelectInput = document.getElementById("devSelectPhoto");
+const fileNameSpan = document.getElementById("devFileName");
+
+const photoDescriptionTextarea = document.getElementById("devPhotoDesc_upload");
+
+const photoResultButtons = document.querySelector(".fileMngWrap .popFunc");
+const photoList = document.getElementById("devPhotoVideoList");
+
+let tempFileName = fileNameSpan.textContent;
+let photoImage = "";
+
+// 복리후생
+const moreWelfareInfoButton = document.getElementById("devWlfrInfo");
+const welfareModalLayer = document.querySelector(".giWelfareModal");
+
+const welfareModalContent = document.querySelector(
+    ".giWelfareModal .modalContent",
+);
+const welfareModalCloseButton = document.querySelector(
+    ".giWelfareModal .btnModalClose",
+);
+const welfareModalResultButtons = document.querySelector(
+    ".giWelfareModal .regPrefWrap .buttons",
+);
+
+const welfareLists = document.querySelectorAll(
+    ".giWelfareModal .scrlBx .fieldList ul",
+);
+const previewWelfareList = document.querySelector(".devPreviewList");
+const welfareDirectInputSection = document.querySelector(
+    ".seflAddInpWrap.devDirectInput",
+);
+const previewWelfareListResetButton =
+    welfareDirectInputSection.nextElementSibling;
+
+const recommendWelfareButtons = document.querySelector(".autoWlfrRegArea");
+const welfareList = document.getElementById("devWlfrList");
+
+const body = document.querySelector("body");
 
 // 함수
 // input formatting
@@ -197,9 +247,54 @@ const executeDaumPostcode = () => {
     }).open();
 };
 
+// 업종 기본값 설정
+// function getIndustryInputInitialValue() {
+//     let result = [];
+
+//     for (let partList of industryPartLists) {
+//         const [partItem] = partList
+//             .querySelectorAll(".devPartItem")
+//             .filter(
+//                 (partItem) => partItem.dataset.part === industryInput.value,
+//             );
+//         if (partItem) {
+//             result.push(partItem);
+//             result.push(partList);
+//             break;
+//         }
+//     }
+//     const [category] = industryCategoryList
+//         .querySelectorAll(".devPartCtgr")
+//         .filter(
+//             (ctgr) =>
+//                 ctgr.dataset.partCtgrCode === result[1].dataset.partCtgrCode,
+//         );
+//     result.push(category);
+
+//     return result;
+// }
+// function setIndustrySelectClass() {
+//     if (industryInput.value) {
+//         const initialValue = getIndustryInputInitialValue();
+
+//         initialValue.forEach((value, index) => {
+//             value.classList.add(index === 1 ? "devOn" : "on");
+//         });
+//     }
+// }
+
+// 복리후생 기본값 설정
+function setWelfareInitialValue() {}
+
 // 이벤트
 // input
 companyBasicinputs.forEach((input) => {
+    // value 가 있을 때
+    if (input.value) {
+        console.log(input, input.closest(".elWrap"));
+        input.closest(".elWrap").classList.add("ok");
+    }
+
     // focus
     input.addEventListener("focus", (e) => {
         if (input.id === "devOpenDate" || input.id === "devFax") {
@@ -611,11 +706,368 @@ overviewTextareaLayer.addEventListener("click", (e) => {
     overviewTextareaLayer.firstElementChild.style.display = "none";
 });
 document.addEventListener("click", (e) => {
-    if (e.target.historyTextareaLayer) {
+    if (
+        !e.target.closest(".artCoHistory .mtcTxaType") &&
+        !historyTextareaLayer.lastElementChild.value
+    ) {
         historyTextareaLayer.firstElementChild.style.display = "block";
     }
 
-    if (e.target !== overviewTextareaLayer) {
+    if (
+        !e.target.closest(".artCoOverview .mtcTxaType") &&
+        !overviewTextareaLayer.lastElementChild.value
+    ) {
         overviewTextareaLayer.firstElementChild.style.display = "block";
+    }
+});
+
+// 사진 업로드
+photoUploadButton.addEventListener("click", (e) => {
+    if (e.target.closest(".button-photo-upload")) {
+        if (photoList.children.length === 15) {
+            alert("사진은 최대 15개 까지 업로드 할 수 있습니다.");
+            return;
+        }
+        photoSelectInput.value = "";
+        photoDescriptionTextarea.value = "";
+
+        photoDescriptionTextarea
+            .closest(".txaBx")
+            .querySelector("em").textContent = 0;
+
+        fileNameSpan.textContent = tempFileName;
+        photoImage = "";
+
+        photoUploadLayer.classList.add("on");
+    }
+});
+
+photoUploadCloseButton.addEventListener("click", (e) => {
+    photoUploadLayer.classList.remove("on");
+});
+photoDelegatorButton.addEventListener("click", (e) => {
+    if (e.target.closest("label")) {
+        photoSelectInput.click();
+    }
+});
+photoSelectInput.addEventListener("change", (e) => {
+    const [file] = e.target.files;
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.addEventListener("load", (e) => {
+        photoImage = e.target.result;
+
+        const check = ["gif", "jpeg", "jpg"].some((extension) =>
+            photoImage.includes(extension),
+        );
+
+        if (!check) {
+            photoImage = "";
+            fileNameSpan.textContent = "";
+            photoSelectInput.value = "";
+
+            alert("파일 형식이 올바르지 않습니다.");
+            return;
+        }
+        fileNameSpan.textContent = file.name;
+    });
+});
+photoDescriptionTextarea.addEventListener("input", (e) => {
+    e.target.maxLength < e.target.value.length &&
+        (e.target.value = e.target.value.slice(0, e.target.maxLength));
+
+    e.target.closest(".txaBx").querySelector("em").textContent =
+        e.target.value.length;
+});
+photoResultButtons.addEventListener("click", (e) => {
+    if (e.target.closest(".devClosePhotoLive")) {
+        photoUploadLayer.classList.remove("on");
+    } else {
+        if (photoImage) {
+            // 설명 p
+            // 사진 li
+            const photoItem = document.createElement("li");
+
+            if (photoList.previousElementSibling.tagName !== "P") {
+                const description = document.createElement("p");
+                description.classList.add("upload-text-guide");
+                description.innerHTML =
+                    "사진을 끌어다 순서를 변경하거나, 대표 사진으로 옮겨 놓을 수 있습니다.";
+                photoList.before(description);
+            }
+
+            photoItem.classList.add("thumbnail");
+            photoItem.innerHTML = `
+                <div class="thumb ok">
+                    <img src="${photoImage}">
+                    <span class="btnFunc">
+                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>
+                    </span>
+                </div>
+                <div class="text-box ${photoDescriptionTextarea.value && "has-value"}">
+                    <fieldset>
+                        <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요.">${photoDescriptionTextarea.value}</textarea>
+                    </fieldset>
+                </div>
+            `;
+
+            photoList.appendChild(photoItem);
+
+            photoUploadLayer.classList.remove("on");
+        } else {
+            alert("이미지 주소가 입력되지 않았습니다.");
+        }
+    }
+});
+
+photoList.addEventListener("focusin", (e) => {
+    if (e.target.tagName === "TEXTAREA") {
+        e.target.closest(".text-box").classList.add("focus");
+    }
+});
+photoList.addEventListener("focusout", (e) => {
+    if (e.target.tagName === "TEXTAREA") {
+        e.target.closest(".text-box").classList.remove("focus");
+    }
+});
+photoList.addEventListener("input", (e) => {
+    if (e.target.tagName === "TEXTAREA") {
+        if (e.target.value) {
+            e.target.closest(".text-box").classList.add("has-value");
+        } else {
+            e.target.closest(".text-box").classList.remove("has-value");
+        }
+    }
+});
+photoList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        confirm("해당 사진을 삭제하시겠습니까?") &&
+            e.target.closest(".thumbnail").remove();
+
+        photoList.children.length || photoList.previousElementSibling.remove();
+    }
+});
+
+// 복리후생
+//      기본 checked 설정
+
+//      모달 관련
+moreWelfareInfoButton.addEventListener("click", (e) => {
+    const scroll = window.scrollY;
+    body.style.height = "100%";
+    body.style.position = "fixed";
+    body.style.top = `-${scroll}px`;
+
+    moreWelfareInfoButton.classList.add("isCheckButton");
+    welfareModalLayer.style.display = "block";
+    welfareModalLayer.style.opacity = 1;
+
+    // const welfareInputList = [];
+    // welfareLists
+    //     .map((list) => list.querySelectorAll("input"))
+    //     .forEach((list) => {
+    //         welfareInputList.push(...list);
+    //     });
+
+    // const welfareResultList = welfareList
+    //     .querySelectorAll("li")
+    //     .map((li) => li.firstElementChild);
+    // const welfareCheckedList = welfareInputList.filter(
+    //     (input) => input.checked,
+    // );
+
+    // if (welfareCheckedList.length === 0) {
+    //     if (welfareCheckedList.length !== 0) {
+    //         welfareCheckedList.forEach((input) => {
+    //             input.checked = false;
+    //         });
+    //     }
+
+    //     welfareResultList.forEach((button) => {
+    //         const previewWelfareItem = document.createElement("li");
+    //         previewWelfareItem.classList.add("subItem");
+    //         previewWelfareItem.innerHTML = `
+    //                     <span class="inr">
+    //                         <span class="devItemText">${button.textContent}</span>
+    //                         <button type="button" class="spRegA btnItemDel" data-item-code="${button.dataset.itemCode}"></button>
+    //                     </span>
+    //                 `;
+
+    //         previewWelfareList.appendChild(previewWelfareItem);
+    //         previewWelfareList.style.display = "block";
+
+    //         button.closest("span").classList.add("chk");
+    //     });
+    // } else {
+    // }
+});
+
+welfareModalCloseButton.addEventListener("click", (e) => {
+    body.style.height = "";
+    body.style.position = "";
+    body.style.top = "";
+
+    welfareModalLayer.style.display = "none";
+    welfareModalLayer.style.opacity = 0;
+});
+welfareModalResultButtons.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        if (e.target.classList.contains("btnCancel")) {
+            body.style.height = "";
+            body.style.position = "";
+            body.style.top = "";
+
+            welfareModalLayer.style.display = "none";
+            welfareModalLayer.style.opacity = 0;
+        } else {
+        }
+    }
+});
+welfareLists.forEach((welfareList) => {
+    welfareList.addEventListener("change", (e) => {
+        if (e.target.tagName === "INPUT") {
+            if (e.target.checked) {
+                const previewWelfareItem = document.createElement("li");
+                previewWelfareItem.classList.add("subItem");
+                previewWelfareItem.innerHTML = `
+                    <span class="inr">
+                        <span class="devItemText">${e.target.nextElementSibling.textContent}</span><button type="button" class="spRegA btnItemDel" data-item-code="${e.target.value}"></button>
+                    </span>
+                `;
+
+                previewWelfareList.appendChild(previewWelfareItem);
+                previewWelfareList.style.display = "block";
+
+                e.target.closest("span").classList.add("chk");
+            } else {
+                const [target] = previewWelfareList
+                    .querySelectorAll("button")
+                    .filter((item) => item.dataset.itemCode === e.target.value);
+
+                target.closest(".subItem").remove();
+                e.target.closest("span").classList.remove("chk");
+
+                previewWelfareList.children.length ||
+                    (previewWelfareList.style.display = "none");
+            }
+        }
+    });
+});
+previewWelfareList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        let target = [];
+        for (let welfareList of welfareLists) {
+            target = welfareList
+                .querySelectorAll("input")
+                .filter((input) => input.value === e.target.dataset.itemCode);
+
+            if (target.length) {
+                break;
+            }
+        }
+
+        target[0].checked = false;
+        e.target.closest(".subItem").remove();
+        target[0].closest("span").classList.remove("chk");
+
+        previewWelfareList.children.length ||
+            (previewWelfareList.style.display = "none");
+    }
+});
+welfareDirectInputSection.addEventListener("focusin", (e) => {
+    if (e.target.tagName === "INPUT") {
+        e.target.closest(".inpTxItem").classList.add("ok");
+    }
+});
+welfareDirectInputSection.addEventListener("focusout", (e) => {
+    if (e.target.tagName === "INPUT") {
+        e.target.value || e.target.closest(".inpTxItem").classList.remove("ok");
+    }
+});
+welfareDirectInputSection.addEventListener("click", (e) => {
+    if (e.target.closest(".devDirectInputBtn")) {
+        // server: db에서 중복확인 필요
+        const itemCode = Math.floor(Math.random() * 900000) + 100000;
+        const previewWelfareItem = document.createElement("li");
+        previewWelfareItem.classList.add("subItem");
+        previewWelfareItem.innerHTML = `
+                    <span class="inr">
+                        <span class="devItemText">${e.target.closest(".inpTxItem").firstElementChild.value}</span><button type="button" class="spRegA btnItemDel" data-item-code="${itemCode}"></button>
+                    </span>
+                `;
+
+        previewWelfareList.appendChild(previewWelfareItem);
+        previewWelfareList.style.display = "block";
+        // e.target.closest(".inpTxItem").firstElementChild.value = "";
+    }
+});
+previewWelfareListResetButton.addEventListener("click", (e) => {
+    previewWelfareList.querySelectorAll("button").forEach((item) => {
+        // server: 내가 직접 입력한 항목과 원래 있던 항목을 자리수로 검사
+        if (item.dataset.itemCode.length === 6) {
+            item.closest(".subItem").remove();
+        } else {
+            let target = [];
+            for (let welfareList of welfareLists) {
+                target = welfareList
+                    .querySelectorAll("input")
+                    .filter((input) => input.value === item.dataset.itemCode);
+
+                if (target.length) {
+                    break;
+                }
+            }
+
+            target[0].checked = false;
+            item.closest(".subItem").remove();
+            target[0].closest("span").classList.remove("chk");
+
+            previewWelfareList.children.length ||
+                (previewWelfareList.style.display = "none");
+        }
+    });
+});
+
+//      모달 밖
+recommendWelfareButtons.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        const [target] = welfareList
+            .querySelectorAll("li")
+            .map((li) => li.firstElementChild)
+            .filter(
+                (button) =>
+                    button.dataset.itemCode === e.target.dataset.itemCode,
+            );
+
+        if (welfareList.querySelectorAll("li").length && target) {
+            alert("이미 선택하신 복리후생입니다.");
+        } else {
+            const welfareItem = document.createElement("li");
+            welfareItem.classList.add("subItem");
+            welfareItem.innerHTML = `
+                    <button type="button" class="devItemDel" data-item-code="${e.target.dataset.itemCode}">${e.target.textContent}</button>
+                `;
+
+            welfareList.appendChild(welfareItem);
+            welfareList.previousElementSibling.style.display = "none";
+        }
+    }
+});
+welfareList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        const [target] = welfareList
+            .querySelectorAll("li")
+            .map((li) => li.firstElementChild)
+            .filter(
+                (button) =>
+                    button.dataset.itemCode === e.target.dataset.itemCode,
+            );
+
+        target.closest("li").remove();
+        if (!welfareList.querySelectorAll("li").length) {
+            welfareList.previousElementSibling.style.display = "block";
+        }
     }
 });

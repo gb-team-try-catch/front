@@ -1394,35 +1394,55 @@ address, caption, em {
     background: rgba(0, 0, 0, .6);
     z-index: 10;
 }
-
-
-
-
-
-
-
-
-
-
-
+.artCoWelfare .plus {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 13px;
+    /* letter-spacing: 0px; */
+    margin-bottom: 19px;
+    color: #333;
+    line-height: 36px;
+}
+.artCoWelfare .plus span {
+    margin-right: 12px;
+}
+.artCoWelfare .plus span, .artCoWelfare .plus button {
+    margin-top: 9px;
+}
+.artCoWelfare .plus button {
+    background: #f0f3f9;
+    border: 1px solid #f0f3f9;
+    font-size: 12px;
+    /* letter-spacing: 0px; */
+    padding: 10px;
+    margin-right: 5px;
+    color: #333;
+    border-radius: 5%;
+    box-sizing: border-box;
+}
+.artCoWelfare .plus button:hover {
+    background: #e3e9f4;
+    border: 1px solid #c3d2f0;
+}
+.artCoWelfare .plus button::before {
+    content: "";
+    display: inline-block;
+    background: url("https://i.jobkorea.kr/content/images/ver_1/common/icon_plus.png") no-repeat;
+    width: 9px;
+    height: 8px;
+}
+.artCoWelfare > p {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #666;
+    line-height: 26px;
+}
 .regModal .choiceArea .choiceListArea:after {
     display: block;
     clear: both;
     content: "";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
     /* 사진 업로드 */
 .artCoPhotoVideo {
     position: relative;
@@ -1579,6 +1599,8 @@ address, caption, em {
     background-color: #fafbfd;
     border: 1px solid #fafbfd;
     box-sizing: border-box;
+
+    transition: background-color .25s ease-in-out;
 }
 .artCoPhotoVideo .thumbList .sortable li .text-box textarea {
     overflow-y: hidden;
@@ -1927,6 +1949,10 @@ address, caption, em {
     font-size: 13px;
     letter-spacing: 0px;
     color: #999 !important;
+    transition: color .25s ease-in-out
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box.focus textarea::placeholder {
+    color: #ccc !important;
 }
 .popPhotoVideo .descWrap .txArea::placeholder {
     font-size: 13px;
@@ -2052,3 +2078,7 @@ address, caption, em {
     height: 30px;
     background-position: -265px -45px;
 }
+
+
+
+

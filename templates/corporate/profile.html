@@ -181,7 +181,7 @@
                                                             설립일
                                                             <span class="point">*</span>
                                                         </label>
-                                                        <input type="text" id="devOpenDate" class="inpDefault devAnimPh" name="Open_Date" maxlength="10">
+                                                        <input type="text" id="devOpenDate" class="inpDefault devAnimPh" name="Open_Date" maxlength="10" value="">
                                                     </div>
                                                 </div>
                                                 <!-- javascript: input 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보를 입력하지 않을 시 error 추가 -->
@@ -198,7 +198,7 @@
                                                             <!-- 선택한 text 들어갈 영역 -->
                                                             <span id="Company_Name" class="txResult devTxResult"></span>
                                                         </button>
-                                                        <input type="hidden" id="Company_Type" name="Company_Type">
+                                                        <input type="hidden" id="Company_Type" name="Company_Type" value="">
                                                         <!-- 레이어 영역 -->
                                                         <div class="lyElBx devLyElBx">
                                                             <ul class="selTypeList">
@@ -285,11 +285,12 @@
                                                             <!-- 선택한 text 들어갈 영역 -->
                                                             <span id="Industry_Name" class="txResult devTxResult"></span>
                                                         </button>
-                                                        <input type="hidden" id="Industry_Code" name="Industry_Code">
+                                                        <!-- server: 기본값이 있다면 value에 넣기(코드로) -->
+                                                        <input type="hidden" id="Industry_Code" name="Industry_Code" value="">
                                                         <!-- 레이어 영역 -->
                                                         <div class="lyElBx devLyElBx">
                                                             <div class="selTypeList">
-                                                                <!-- server, javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
+                                                                <!-- javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
                                                                 <ul>
                                                                     <li class="devPartCtgr" data-part-ctgr-code="10001">
                                                                         <button type="button">서비스업</button>
@@ -309,7 +310,7 @@
                                                                     <li class="devPartCtgr" data-part-ctgr-code="10011">
                                                                         <button type="button">교육업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr on" data-part-ctgr-code="10003">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10003">
                                                                         <button type="button">건설업</button>
                                                                     </li>
                                                                     <li class="devPartCtgr" data-part-ctgr-code="10004">
@@ -325,8 +326,8 @@
                                                                         <button type="button">기관·협회</button>
                                                                     </li>
                                                                 </ul>
-                                                                <!-- server, javascript: 선택된 리스트가 있다면 devOn 추가(회원가입 때 선택한 업종) -->
-                                                                    <!-- server, javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
+                                                                <!-- javascript: 선택된 리스트가 있다면 devOn 추가(회원가입 때 선택한 업종) -->
+                                                                    <!-- javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
                                                                 <ul class="devPartList " data-part-ctgr-code="10001" style="display:none">
                                                                     <li data-part="1000001" class="devPartItem">
                                                                         <button type="button">호텔·여행·항공</button>
@@ -465,11 +466,11 @@
                                                                         <button type="button">학습지·방문교육</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList devOn" data-part-ctgr-code="10003" style="display:none">
+                                                                <ul class="devPartList" data-part-ctgr-code="10003" style="display:none">
                                                                     <li data-part="1000018" class="devPartItem">
                                                                         <button type="button">건축·설비·환경</button>
                                                                     </li>
-                                                                    <li data-part="1000019" class="devPartItem on">
+                                                                    <li data-part="1000019" class="devPartItem">
                                                                         <button type="button">건설·시공·토목·조경</button>
                                                                     </li>
                                                                     <li data-part="1000020" class="devPartItem">
@@ -731,15 +732,12 @@
                                     <h3 class="info_hd_3">
                                         <label for="lb_welfare">복리후생</label>
                                     </h3>
-                                    <button type="button" class="btnSetFn" id="devGetLastWlfr">
-                                        <span>최신 공고의 복리후생 불러오기</span>
-                                    </button>
                                     <div class="WelfareType">
                                         <span class="ph" id="devEmptyList">복리후생을 선택 해 주세요.</span>
                                         <!-- javascript: 선택된 복리후생이 있다면 display: none -->
                                         <ul class="welfare-list" id="devWlfrList">
                                             <!-- <li>
-                                                <button type="button" class="devItemDel">임직원 할인</button>
+                                                <button type="button" class="devItemDel" data-item-code>임직원 할인</button>
                                             </li> -->
                                         </ul>
                                         <!-- javascript: 복리후생이 선택되면 ul에 li태그 동적으로 생성 -->
@@ -999,14 +997,14 @@
                                                         <div class="choiceArea">
                                                             <div class="choiceListArea">
                                                                 <div class="keywordListBx">
-                                                                    <ul class="subList devPreviewList" style="display: block;">
-                                                                        <li class="subItem">
+                                                                    <ul class="subList devPreviewList" style="display: none;">
+                                                                        <!-- <li class="subItem">
                                                                             <span class="inr">
-                                                                                <span class="devItemText">공무원연금</span><button type="button" class="spRegA btnItemDel"></button>
+                                                                                <span class="devItemText">공무원연금</span><button type="button" class="spRegA btnItemDel" data-item-code="31"></button> -->
                                                                                 <!-- javascript: 선택한 복리후생의 textContent가 들어가도록 -->
                                                                                 <!-- javascript: 버튼 누르면 선택된 복리후생 사라짐 -->
-                                                                            </span>
-                                                                        </li>
+                                                                            <!-- </span>
+                                                                        </li> -->
                                                                         <!-- javascript: 복리후생이 선택되면 ul에 li태그 동적으로 생성 -->
                                                                     </ul>
                                                                     <!-- javascript: 복리후생이 선택되면 display: block -->
@@ -1034,13 +1032,23 @@
                                                 </div>
                                                 <button type="button" class="btnModalClose spRegA"></button>
                                             </div>
-                                            <div class="modalBg">
-
-                                            </div>
+                                            <div class="modalBg"></div>
                                         </div>
                                         <!-- javascript: 버튼 눌렀을 때 display: block, opacity: 1  -->
                                         <!-- javascript: 버튼 눌렀을 때 body에 스타일 추가 width: 100%; height: 100%; position: fixed; top: -1200px; -->
                                     </div>
+                                    <div class="plus autoWlfrRegArea">
+                                        <span class="autoTitle">추천</span>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="77217">교통비</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="2">격주휴무</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="21">구내식당</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="94172">사내카페</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="99">수면실</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="45">가족수당</button>
+                                        <!-- server: 아무거나 불러와서 채우기 -->
+                                    </div>
+                                    <p>· &nbsp;기업정보의 복리후생 정보만 업데이트 됩니다.</p>
+                                    <p>· &nbsp;공고에 노출되는 복리후생 정보는 해당 공고의 수정 페이지에서 업데이트해 주세요.</p>
                                 </div>
 
                                 <!-- 사진 업로드 -->
@@ -1058,42 +1066,27 @@
                                             </button>
                                             <!-- javascript: 사진 업로드 모달 -->
                                         </div>
-                                        <p class="upload-text-guide">
+                                        <!-- <p class="upload-text-guide">
                                             사진을 끌어다 순서를 변경하거나, 대표 사진으로 옮겨 놓을 수 있습니다.
-                                        </p>
+                                        </p> -->
                                         <!-- javascirpt: 사진 업로드 시 동적으로 생성됨 -->
                                         <ul id="devPhotoVideoList" class="sortable" style="position: static;">
-                                            <li class="thumbnail">
+                                            <!-- <li class="thumbnail">
                                                 <div class="thumb ok">
                                                     <img src="https://file2.jobkorea.co.kr/Company/Visual_Co/Image_Thumb_View_CoRead.asp?FN=2026\1\JK_CO_k0nFme926012215002321_150024.jpg&v=20260122150035&W=234&H=174">
                                                     <span class="btnFunc">
-                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>
-                                                    </span>
-                                                </div>
-                                                <div class="text-box">
-                                                    <fieldset>
-                                                        <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요."></textarea>
-                                                    </fieldset>
-                                                </div>
-                                                <!-- javascript: textarea focus 시 focus 추가 -->
-                                                <!-- javascript: textarea에 value가 있다면 has-value 추가 -->
-                                            </li>
-                                            <li class="thumbnail">
-                                                <div class="thumb ok">
-                                                    <img src="https://file2.jobkorea.co.kr/Company/Visual_Co/Image_Thumb_View_CoRead.asp?FN=2026\1\JK_CO_k0nFme926012215002321_150024.jpg&v=20260122150035&W=234&H=174">
-                                                    <span class="btnFunc">
-                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>
+                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>  -->
                                                         <!-- javascript: 버튼 클릭 시 alert으로 한 번 더 확인하고, 사진 지워짐 -->
-                                                    </span>
+                                                    <!-- </span>
                                                 </div>
                                                 <div class="text-box">
                                                     <fieldset>
                                                         <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요."></textarea>
                                                     </fieldset>
-                                                </div>
+                                                </div> -->
                                                 <!-- javascript: textarea focus 시 focus 추가 -->
                                                 <!-- javascript: textarea에 value가 있다면 has-value 추가 -->
-                                            </li>
+                                            <!-- </li> -->
                                             <!-- javascript: 사진을 업로드 시 동적으로 li태그 생성 -->
                                         </ul>
                                     </div>
@@ -1146,7 +1139,7 @@
                                                     <p class="popFunc">
                                                         <button type="button" class="mtcBtnBd devClosePhotoLive">
                                                             <span>취소</span>
-                                                        </button><button type="submit" class="mtcBtnBg">
+                                                        </button><button type="button" class="mtcBtnBg">
                                                             <span>확인</span>
                                                         </button>
                                                         <!-- javascript: 버튼 클릭 이벤트 -->
