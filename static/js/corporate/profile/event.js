@@ -163,8 +163,8 @@ const welfareModalResultButtons = document.querySelector(
     ".giWelfareModal .regPrefWrap .buttons",
 );
 
-const welfareLists = document.querySelectorAll(
-    ".giWelfareModal .scrlBx .fieldList ul",
+const welfareModalList = document.querySelectorAll(
+    ".giWelfareModal .scrlBx .fieldList ul li",
 );
 const previewWelfareList = document.querySelector(".devPreviewList");
 const welfareDirectInputSection = document.querySelector(
@@ -176,7 +176,19 @@ const previewWelfareListResetButton =
 const recommendWelfareButtons = document.querySelector(".autoWlfrRegArea");
 const welfareList = document.getElementById("devWlfrList");
 
+//      모달 input 리스트
+const welfareModalInputList = welfareModalList.map((list) =>
+    list.querySelector("input"),
+);
+//      기본 체크박스
+const welfareModalBasicInputValueList = welfareModalInputList
+    .filter((input) => input.checked)
+    .map((input) => input.value);
+
 const body = document.querySelector("body");
+
+let tempWelfareInputList = [];
+let tempWelfareModalInputList = [];
 
 // 함수
 // input formatting
@@ -282,9 +294,6 @@ const executeDaumPostcode = () => {
 //         });
 //     }
 // }
-
-// 복리후생 기본값 설정
-function setWelfareInitialValue() {}
 
 // 이벤트
 // input
@@ -851,10 +860,121 @@ photoList.addEventListener("click", (e) => {
 });
 
 // 복리후생
-//      기본 checked 설정
+//      추천버튼
+recommendWelfareButtons.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        // welfareList button 리스트
+        const welfareButtonList = welfareList
+            .querySelectorAll("li")
+            .map((li) => li.firstElementChild);
+        // 밖에서 선언하면 리스트에 동적으로 생성된 요소는 가져올 수 없음
 
-//      모달 관련
+        // 이미 선택한 복리후생이 있는지 검사
+        const [duplication] = welfareButtonList.filter(
+            (button) => button.dataset.itemCode === e.target.dataset.itemCode,
+        );
+
+        if (duplication) {
+            // 이미 선택했다면 alert창
+            alert("이미 선택하신 복리후생입니다.");
+        } else {
+            // 복리후생 리스트에 추가
+            const welfareItem = document.createElement("li");
+            welfareItem.innerHTML = `
+                    <button type="button" class="devItemDel" data-item-code="${e.target.dataset.itemCode}">${e.target.textContent}</button>
+                `;
+            welfareList.appendChild(welfareItem);
+
+            // 설명글 보이지 않게
+            welfareList.previousElementSibling.style.display = "none";
+
+            // 모달 input check로 바꾸기
+            const [targetInput] = welfareModalInputList.filter(
+                (input) => input.value === e.target.dataset.itemCode,
+            );
+
+            targetInput.closest("span").classList.add("chk");
+            targetInput.checked = true;
+            tempWelfareInputList.push(targetInput);
+        }
+    }
+});
+welfareList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+        // welfareList button 리스트
+        const welfareButtonList = welfareList
+            .querySelectorAll("li")
+            .map((li) => li.firstElementChild);
+
+        // 삭제 타겟
+        const [targetButton] = welfareButtonList.filter(
+            (button) => button.dataset.itemCode === e.target.dataset.itemCode,
+        );
+
+        // 리스트에서 삭제
+        targetButton.closest("li").remove();
+
+        // 모달 input check를 false로 바꾸기
+        const [targetInput] = welfareModalInputList.filter(
+            (input) => input.value === e.target.dataset.itemCode,
+        );
+
+        targetInput.closest("span").classList.remove("chk");
+        targetInput.checked = false;
+        tempWelfareInputList = tempWelfareInputList.filter(
+            (input) => input.value !== targetInput.value,
+        );
+
+        // 리스트에 아무것도 없다면 설명글 보여주기
+        if (!tempWelfareInputList.length) {
+            welfareList.previousElementSibling.style.display = "block";
+        }
+    }
+});
+//      전체보기
+
 moreWelfareInfoButton.addEventListener("click", (e) => {
+    // check인 input을 previewWelfareList에 추가하기
+
+    // 추천으로 추가한 복리후생 항목이 0개라면
+    // 기존 checked input에 클래스 추가/checked를 true로
+    welfareModalInputList
+        .filter((input) =>
+            welfareModalBasicInputValueList.includes(input.value),
+        )
+        .forEach((input) => {
+            if (!tempWelfareInputList.length) {
+                input.checked = true;
+                input.closest("span").classList.add("chk");
+            } else {
+                input.checked = false;
+                input.closest("span").classList.remove("chk");
+            }
+        });
+
+    // 모달 리스트 비우기
+    previewWelfareList.innerHTML = "";
+    // 비우지 않으면 이전 값들 누적됨
+
+    // 모달 리스트에 값 넣기
+    welfareModalInputList
+        .filter((input) => input.checked)
+        .forEach((input) => {
+            const previewWelfareItem = document.createElement("li");
+            previewWelfareItem.classList.add("subItem");
+            previewWelfareItem.innerHTML = `
+                        <span class="inr">
+                            <span class="devItemText">${input.nextElementSibling.textContent}</span>
+                            <button type="button" class="spRegA btnItemDel" data-item-code="${input.value}"></button>
+                        </span>
+                    `;
+
+            previewWelfareList.appendChild(previewWelfareItem);
+        });
+    // 모달 리스트 열기
+    previewWelfareList.style.display = "block";
+
+    // 모달창 열기
     const scroll = window.scrollY;
     body.style.height = "100%";
     body.style.position = "fixed";
@@ -863,70 +983,66 @@ moreWelfareInfoButton.addEventListener("click", (e) => {
     moreWelfareInfoButton.classList.add("isCheckButton");
     welfareModalLayer.style.display = "block";
     welfareModalLayer.style.opacity = 1;
-
-    // const welfareInputList = [];
-    // welfareLists
-    //     .map((list) => list.querySelectorAll("input"))
-    //     .forEach((list) => {
-    //         welfareInputList.push(...list);
-    //     });
-
-    // const welfareResultList = welfareList
-    //     .querySelectorAll("li")
-    //     .map((li) => li.firstElementChild);
-    // const welfareCheckedList = welfareInputList.filter(
-    //     (input) => input.checked,
-    // );
-
-    // if (welfareCheckedList.length === 0) {
-    //     if (welfareCheckedList.length !== 0) {
-    //         welfareCheckedList.forEach((input) => {
-    //             input.checked = false;
-    //         });
-    //     }
-
-    //     welfareResultList.forEach((button) => {
-    //         const previewWelfareItem = document.createElement("li");
-    //         previewWelfareItem.classList.add("subItem");
-    //         previewWelfareItem.innerHTML = `
-    //                     <span class="inr">
-    //                         <span class="devItemText">${button.textContent}</span>
-    //                         <button type="button" class="spRegA btnItemDel" data-item-code="${button.dataset.itemCode}"></button>
-    //                     </span>
-    //                 `;
-
-    //         previewWelfareList.appendChild(previewWelfareItem);
-    //         previewWelfareList.style.display = "block";
-
-    //         button.closest("span").classList.add("chk");
-    //     });
-    // } else {
-    // }
 });
 
 welfareModalCloseButton.addEventListener("click", (e) => {
+    // 모달창 닫기
     body.style.height = "";
     body.style.position = "";
     body.style.top = "";
 
+    moreWelfareInfoButton.classList.remove("isCheckButton");
     welfareModalLayer.style.display = "none";
     welfareModalLayer.style.opacity = 0;
 });
 welfareModalResultButtons.addEventListener("click", (e) => {
     if (e.target.tagName === "BUTTON") {
         if (e.target.classList.contains("btnCancel")) {
+            // 모달 - 취소
             body.style.height = "";
             body.style.position = "";
             body.style.top = "";
 
+            moreWelfareInfoButton.classList.remove("isCheckButton");
             welfareModalLayer.style.display = "none";
             welfareModalLayer.style.opacity = 0;
         } else {
+            // 모달 - 확인
         }
     }
 });
-welfareLists.forEach((welfareList) => {
-    welfareList.addEventListener("change", (e) => {
+// welfareLists.forEach((welfareList) => {
+//     welfareList.addEventListener("change", (e) => {
+//         if (e.target.tagName === "INPUT") {
+//             if (e.target.checked) {
+//                 const previewWelfareItem = document.createElement("li");
+//                 previewWelfareItem.classList.add("subItem");
+//                 previewWelfareItem.innerHTML = `
+//                     <span class="inr">
+//                         <span class="devItemText">${e.target.nextElementSibling.textContent}</span><button type="button" class="spRegA btnItemDel" data-item-code="${e.target.value}"></button>
+//                     </span>
+//                 `;
+
+//                 previewWelfareList.appendChild(previewWelfareItem);
+//                 previewWelfareList.style.display = "block";
+
+//                 e.target.closest("span").classList.add("chk");
+//             } else {
+//                 const [target] = previewWelfareList
+//                     .querySelectorAll("button")
+//                     .filter((item) => item.dataset.itemCode === e.target.value);
+
+//                 target.closest(".subItem").remove();
+//                 e.target.closest("span").classList.remove("chk");
+
+//                 previewWelfareList.children.length ||
+//                     (previewWelfareList.style.display = "none");
+//             }
+//         }
+//     });
+// });
+welfareModalList.forEach((li) => {
+    li.addEventListener("change", (e) => {
         if (e.target.tagName === "INPUT") {
             if (e.target.checked) {
                 const previewWelfareItem = document.createElement("li");
@@ -938,136 +1054,17 @@ welfareLists.forEach((welfareList) => {
                 `;
 
                 previewWelfareList.appendChild(previewWelfareItem);
-                previewWelfareList.style.display = "block";
-
                 e.target.closest("span").classList.add("chk");
             } else {
-                const [target] = previewWelfareList
+                const [targetButton] = previewWelfareList
                     .querySelectorAll("button")
-                    .filter((item) => item.dataset.itemCode === e.target.value);
+                    .filter(
+                        (button) => button.dataset.itemCode === e.target.value,
+                    );
 
-                target.closest(".subItem").remove();
                 e.target.closest("span").classList.remove("chk");
-
-                previewWelfareList.children.length ||
-                    (previewWelfareList.style.display = "none");
+                targetButton.closest(".subItem").remove();
             }
         }
     });
-});
-previewWelfareList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        let target = [];
-        for (let welfareList of welfareLists) {
-            target = welfareList
-                .querySelectorAll("input")
-                .filter((input) => input.value === e.target.dataset.itemCode);
-
-            if (target.length) {
-                break;
-            }
-        }
-
-        target[0].checked = false;
-        e.target.closest(".subItem").remove();
-        target[0].closest("span").classList.remove("chk");
-
-        previewWelfareList.children.length ||
-            (previewWelfareList.style.display = "none");
-    }
-});
-welfareDirectInputSection.addEventListener("focusin", (e) => {
-    if (e.target.tagName === "INPUT") {
-        e.target.closest(".inpTxItem").classList.add("ok");
-    }
-});
-welfareDirectInputSection.addEventListener("focusout", (e) => {
-    if (e.target.tagName === "INPUT") {
-        e.target.value || e.target.closest(".inpTxItem").classList.remove("ok");
-    }
-});
-welfareDirectInputSection.addEventListener("click", (e) => {
-    if (e.target.closest(".devDirectInputBtn")) {
-        // server: db에서 중복확인 필요
-        const itemCode = Math.floor(Math.random() * 900000) + 100000;
-        const previewWelfareItem = document.createElement("li");
-        previewWelfareItem.classList.add("subItem");
-        previewWelfareItem.innerHTML = `
-                    <span class="inr">
-                        <span class="devItemText">${e.target.closest(".inpTxItem").firstElementChild.value}</span><button type="button" class="spRegA btnItemDel" data-item-code="${itemCode}"></button>
-                    </span>
-                `;
-
-        previewWelfareList.appendChild(previewWelfareItem);
-        previewWelfareList.style.display = "block";
-        // e.target.closest(".inpTxItem").firstElementChild.value = "";
-    }
-});
-previewWelfareListResetButton.addEventListener("click", (e) => {
-    previewWelfareList.querySelectorAll("button").forEach((item) => {
-        // server: 내가 직접 입력한 항목과 원래 있던 항목을 자리수로 검사
-        if (item.dataset.itemCode.length === 6) {
-            item.closest(".subItem").remove();
-        } else {
-            let target = [];
-            for (let welfareList of welfareLists) {
-                target = welfareList
-                    .querySelectorAll("input")
-                    .filter((input) => input.value === item.dataset.itemCode);
-
-                if (target.length) {
-                    break;
-                }
-            }
-
-            target[0].checked = false;
-            item.closest(".subItem").remove();
-            target[0].closest("span").classList.remove("chk");
-
-            previewWelfareList.children.length ||
-                (previewWelfareList.style.display = "none");
-        }
-    });
-});
-
-//      모달 밖
-recommendWelfareButtons.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        const [target] = welfareList
-            .querySelectorAll("li")
-            .map((li) => li.firstElementChild)
-            .filter(
-                (button) =>
-                    button.dataset.itemCode === e.target.dataset.itemCode,
-            );
-
-        if (welfareList.querySelectorAll("li").length && target) {
-            alert("이미 선택하신 복리후생입니다.");
-        } else {
-            const welfareItem = document.createElement("li");
-            welfareItem.classList.add("subItem");
-            welfareItem.innerHTML = `
-                    <button type="button" class="devItemDel" data-item-code="${e.target.dataset.itemCode}">${e.target.textContent}</button>
-                `;
-
-            welfareList.appendChild(welfareItem);
-            welfareList.previousElementSibling.style.display = "none";
-        }
-    }
-});
-welfareList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-        const [target] = welfareList
-            .querySelectorAll("li")
-            .map((li) => li.firstElementChild)
-            .filter(
-                (button) =>
-                    button.dataset.itemCode === e.target.dataset.itemCode,
-            );
-
-        target.closest("li").remove();
-        if (!welfareList.querySelectorAll("li").length) {
-            welfareList.previousElementSibling.style.display = "block";
-        }
-    }
 });
