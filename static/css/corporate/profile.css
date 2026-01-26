@@ -48,6 +48,10 @@ img {
     border: 0;
     vertical-align: top;
 }
+button, input, table, td, th {
+    font-size: 12px;
+    letter-spacing: 0;
+}
 button, fieldset, form, iframe {
     border: 0;
 }
@@ -285,8 +289,39 @@ address, caption, em {
     margin-bottom: 20px;
 }
         /* 로고 업로드 후 */
-
-
+.artCoSummary .tbLogo .logo {
+    width: 128px;
+    height: 51px;
+    padding-left: 48px;
+}
+.artCoSummary .tbLogo .logo img {
+    width: 100%;
+    height: 100%;
+}
+.btn, .jams-btn, .line-btn {
+    border-radius: 4px;
+}
+.artCoSummary .tbLogo .btn {
+    position: absolute;
+    top: 22px;
+    right: 15px;
+}
+.infoBtnDel {
+    width: 25px;
+    height: 25px;
+    background-position: -60px 0;
+}
+.artCoSummary .tbLogo .btn button {
+    display: block;
+}
+.infoBtnMod {
+    width: 25px;
+    height: 25px;
+    background-position: -100px 0;
+}
+.artCoSummary .tbLogo .btn .infoBtnMod {
+    margin-top: 7px;
+}
         /* 로고 업로드 레이어 */
 .artCoSummary .tbLogo.on .logoUploadWrap {
     display: block;
@@ -305,7 +340,7 @@ address, caption, em {
     font-size: 12px;
     letter-spacing: 0px;
     color: #666;
-};
+}
 .popRecWrap {
     display: none;
     position: absolute;
@@ -316,7 +351,7 @@ address, caption, em {
     box-sizing: border-box;
     z-index: 99;
 }
-#frmLogo .popLogoUpload, #frmLogo .popLogoDel, #frmLogo .popIdRevise {
+#frmLogo .popLogoUpload.on, #frmLogo .popLogoDel.on, #frmLogo .popIdRevise.on {
     display: block;
     position: static;
     width: 510px;
@@ -433,6 +468,39 @@ address, caption, em {
     width: 30px;
     height: 30px;
     background-position: -265px -45px;
+}
+        /* 로고 삭제 레이어 */
+#frmLogo .popLogoDel .popCont {
+    padding: 36px 43px 43px 43px;
+}
+#frmLogo .popLogoDel .popCont .ntcTx {
+    font-size: 15px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+#frmLogo .popRecWrap .popFunc {
+    text-align: center;
+}
+#frmLogo .popLogoDel .popFunc {
+    margin: 35px 0 18px 0;
+}
+#frmLogo .popRecWrap .popFunc button, .popRecWrap .popFunc a {
+    display: inline-block;
+    margin: 0 5px;
+}
+#frmLogo .popLogoDel .popFunc .mtcBtnBg {
+    width: 120px;
+    height: 44px;
+}
+#frmLogo .mtcBtnPopClose {
+    width: 30px;
+    height: 30px;
+    background-position: -265px -45px;
+}
+#frmLogo .popRecWrap .mtcBtnPopClose {
+    position: absolute;
+    top: 19px;
+    right: 18px;
 }
         /* 기본 정보 */
 .artCoBasic .tbCell {
@@ -573,11 +641,6 @@ address, caption, em {
 .elWrap.on .lyElBx {
     display: block;
 }
-.elWrap .selType .selTypeList {
-    background-color: #fff;
-    max-height: 300px;
-    overflow-y: auto;
-}
 .elWrap .selType .selTypeList li:first-child a, .elWrap .selType .selTypeList li:first-child button {
     padding-top: 13px;
 }
@@ -611,9 +674,9 @@ address, caption, em {
     text-align: center;
     vertical-align: middle;
 } */
-/* .elWrap .keySchType {
+.elWrap .keySchType {
     background-color: #fff;
-} */
+}
 .elWrap .keySchType ul {
     max-height: 207px;
     overflow-y: auto;
@@ -667,6 +730,11 @@ address, caption, em {
     overflow-y: auto;
     background: url("https://i.jobkorea.kr/content/images/ver_1/mtc/info/bg_sel_list.png?2018012918") repeat-y left bottom;
 }
+.elWrap .selType .selTypeList {
+    background-color: #fff;
+    max-height: 300px;
+    overflow-y: auto;
+}
 .artCoBasic .tbPart .selTypeList ul {
     float: left;
     width: 238px;
@@ -681,12 +749,12 @@ address, caption, em {
 .artCoBasic .tbPart .selTypeList ul + ul {
     margin-left: 1px;
 }
-.artCoBasic .tbPart .selTypeList .devPartList {
+/* .artCoBasic .tbPart .selTypeList .devPartList {
     display: none;
 }
 .artCoBasic .tbPart .selTypeList .devPartList.devOn {
     display: block;
-}
+} */
 .artCoBasic .tbPart .selTypeBtn {
     padding: 10px 8px 10px 10px;
     border-top: 1px solid #e5e5e5;
@@ -807,6 +875,9 @@ address, caption, em {
     color: #afb0b2;
     top: 10px;
 }
+.mtcSubInfo .elWrap.on .schInpType #devAddrForeign {
+    padding-right: 70px;
+}
             /* 자본금 */
 .artCoBasic .tbCapital .elWrap .schInpType {
     overflow: hidden;
@@ -850,6 +921,12 @@ address, caption, em {
 }
 .artCoBasic .tbCapital .elWrap .schInpType .inpTxItem + .inpTxItem {
     width: 177px;
+}
+.artCoBasic .tbCapital .elWrap .schInpType .inpTxItem + .inpTxItem .inpDefault {
+    padding: 19px 66px 0 17px;
+}
+.artCoBasic .tbCapital .elWrap.on .schInpType .tx, .artCoBasic .tbCapital .elWrap.ok .schInpType .tx {
+    top: 9px;
 }
 
     /* 실적 */
@@ -1317,35 +1394,55 @@ address, caption, em {
     background: rgba(0, 0, 0, .6);
     z-index: 10;
 }
-
-
-
-
-
-
-
-
-
-
-
+.artCoWelfare .plus {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 13px;
+    /* letter-spacing: 0px; */
+    margin-bottom: 19px;
+    color: #333;
+    line-height: 36px;
+}
+.artCoWelfare .plus span {
+    margin-right: 12px;
+}
+.artCoWelfare .plus span, .artCoWelfare .plus button {
+    margin-top: 9px;
+}
+.artCoWelfare .plus button {
+    background: #f0f3f9;
+    border: 1px solid #f0f3f9;
+    font-size: 12px;
+    /* letter-spacing: 0px; */
+    padding: 10px;
+    margin-right: 5px;
+    color: #333;
+    border-radius: 5%;
+    box-sizing: border-box;
+}
+.artCoWelfare .plus button:hover {
+    background: #e3e9f4;
+    border: 1px solid #c3d2f0;
+}
+.artCoWelfare .plus button::before {
+    content: "";
+    display: inline-block;
+    background: url("https://i.jobkorea.kr/content/images/ver_1/common/icon_plus.png") no-repeat;
+    width: 9px;
+    height: 8px;
+}
+.artCoWelfare > p {
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #666;
+    line-height: 26px;
+}
 .regModal .choiceArea .choiceListArea:after {
     display: block;
     clear: both;
     content: "";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
     /* 사진 업로드 */
 .artCoPhotoVideo {
     position: relative;
@@ -1502,6 +1599,8 @@ address, caption, em {
     background-color: #fafbfd;
     border: 1px solid #fafbfd;
     box-sizing: border-box;
+
+    transition: background-color .25s ease-in-out;
 }
 .artCoPhotoVideo .thumbList .sortable li .text-box textarea {
     overflow-y: hidden;
@@ -1850,22 +1949,38 @@ address, caption, em {
     font-size: 13px;
     letter-spacing: 0px;
     color: #999 !important;
+    transition: color .25s ease-in-out
+}
+.artCoPhotoVideo .thumbList .sortable li .text-box.focus textarea::placeholder {
+    color: #ccc !important;
 }
 .popPhotoVideo .descWrap .txArea::placeholder {
     font-size: 13px;
     letter-spacing: 0px;
     color: #999 !important;
 }
+#frmAddr .popAddr .popCont input[type=text]::placeholder {
+    font-size: 13px;
+    letter-spacing: 0px;
+    color: #999 !important;
+}
+/* outline */
+#devCapital_A, #devCapital_B {
+    outline: none;
+}
 
 /* 주소 레이어 */
+.infoTbBx > .tbRow:nth-child(4) {
+    position: relative;
+}
 .lyAddrMng .addrMngWrap.on {
     display: block;
 }
 .lyAddrMng .addrMngWrap {
-    /* display: none; */
+    display: none;
     position: absolute;
-    top: 101px;
-    right: -1px;
+    top: 61px;
+    right: 0px;
     left: auto;
     width: 510px;
     height: auto;
@@ -1875,12 +1990,95 @@ address, caption, em {
     font-size: 12px;
     letter-spacing: 0px;
     color: #666;
-};
-.lyAddrMng,
-.lyAddrMng .addrMngWrap.on,
-#frmAddr,
-#frmAddr .popRecWrap {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
 }
+#frmAddr .popRecWrap.on {
+    display: block;
+}
+#frmAddr .popRecWrap .popHd {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #333;
+    padding: 20px 20px 20px 25px;
+    border-bottom: 1px solid #e0e3ea;
+    box-sizing: border-box;
+}
+#frmAddr .popAddr .popCont {
+    padding: 23px 43px 43px 43px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 6px;
+
+}
+/* content */
+#frmAddr .popAddr .popCont input {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    border-radius: 0px;
+    border: 1px solid #ddd;
+}
+#frmAddr .popAddr .popCont input[type=text] {
+    padding: 0 14px;
+}
+#frmAddr .popAddr .popCont #postcode {
+    width: 35%;
+}
+#frmAddr .popAddr .popCont #detailAddress, #frmAddr .popAddr .popCont #extraAddress   {
+    width: 41.8%;
+}
+#frmAddr .popAddr .popCont input[type=button] {
+    width: 28%;
+    border: 1px solid #003cff;
+    background-color: #003cff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+}
+/*  */
+/* #frmAddr .popAddr .infoFileBx .btnUpload {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #000;
+    width: 128px;
+    height: 62px;
+    margin-left: -1px;
+    border-left: 1px solid #ddd;
+}
+
+#frmAddr .popAddr .infoFileBx .btnUpload span {
+    position: relative;
+} */
+ #frmAddr .popAddr .popFunc {
+    padding: 10px 5px 10px 0;
+    border-top: 1px solid #e5e5e5;
+    text-align: right;
+    /* display: flex;
+    justify-content: center; */
+}
+#frmAddr .popAddr .popFunc button {
+    width: 70px;
+    padding: 0;
+}
+#frmAddr .popRecWrap .popFunc button, #frmAddr .popRecWrap .popFunc a {
+    display: inline-block;
+    margin: 0 5px;
+}
+#frmAddr .mtcBtnBd span {
+    position: relative;
+}
+
+#frmAddr .popRecWrap .mtcBtnPopClose {
+    position: absolute;
+    top: 19px;
+    right: 18px;
+    width: 30px;
+    height: 30px;
+    background-position: -265px -45px;
+}
+
+
+
+

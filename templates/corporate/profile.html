@@ -85,16 +85,24 @@
                                                 </dl>
                                             </div>
 
-                                            <!-- javascript: 로고 업로드 전 -->
                                             <div class="tbCell tbLogo">
                                                 <!-- 파일 업로드 전 -->
-                                                <!-- <button type="button" class="infoBtnB infoBtnUp" id="devLogoUp"><span>로고업로드</span></button> -->
+                                                <button type="button" class="infoBtnB infoBtnUp" id="devLogoUp"><span>로고업로드</span></button>
                                                 <!-- javascript: 파일 업로드 후 버튼 삭제하고 새로운 버튼 추가(innerHTML) -->
-                                                <p class="logo"></p>
-                                                <p class="btn"></p>
+
+                                                <!-- // -->
+                                                <!-- <p class="logo">
+                                                    <img src="">
+                                                </p>
+                                                <p class="btn">
+                                                    <button type="button" class="infoBtn infoBtnDel" id="devLogoDel"></button>
+                                                    <button type="button" class="infoBtn infoBtnMod" id="devLogoModify"></button>
+                                                </p> -->
+                                                <!-- //javascript: 동적으로 생성 -->
 
                                                 <div class="logoUploadWrap">
                                                     <div id="frmLogo">
+                                                        <!-- 로고 업로드 -->
                                                         <div class="popRecWrap popLogoUpload">
                                                             <div class="popHd">
                                                                 <h1>로고 업로드</h1>
@@ -123,6 +131,22 @@
                                                                 </div>
                                                             </div>
                                                             <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseLayer"></button>
+                                                        </div>
+
+                                                        <!-- 로고 삭제 -->
+                                                        <div class="popRecWrap popLogoDel">
+                                                            <div class="popHd">
+                                                                <h1>로고 업로드</h1>
+                                                            </div>
+                                                            <div class="popCont">
+                                                                <p class="ntcTx">등록된 로고를 삭제하시겠습니까?</p>
+                                                                <p class="popFunc">
+                                                                    <button type="button" class="mtcBtnBg" id="devDeleteLogo">
+                                                                        <span>확인</span>
+                                                                    </button>
+                                                                </p>
+                                                            </div>
+                                                            <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseDelLayer"></button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -157,7 +181,7 @@
                                                             설립일
                                                             <span class="point">*</span>
                                                         </label>
-                                                        <input type="text" id="devOpenDate" class="inpDefault devAnimPh" name="Open_Date" maxlength="10">
+                                                        <input type="text" id="devOpenDate" class="inpDefault devAnimPh" name="Open_Date" maxlength="10" value="">
                                                     </div>
                                                 </div>
                                                 <!-- javascript: input 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보를 입력하지 않을 시 error 추가 -->
@@ -174,37 +198,38 @@
                                                             <!-- 선택한 text 들어갈 영역 -->
                                                             <span id="Company_Name" class="txResult devTxResult"></span>
                                                         </button>
+                                                        <input type="hidden" id="Company_Type" name="Company_Type" value="">
                                                         <!-- 레이어 영역 -->
                                                         <div class="lyElBx devLyElBx">
                                                             <ul class="selTypeList">
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="1" class="devCoTypeItem">
                                                                     <button type="button">중소기업</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="2" class="devCoTypeItem">
                                                                     <button type="button">중견기업</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="3" class="devCoTypeItem">
                                                                     <button type="button">대기업</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="4" class="devCoTypeItem">
                                                                     <button type="button">대기업 계열사·자회사</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="5" class="devCoTypeItem">
                                                                     <button type="button">벤처기업</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="6" class="devCoTypeItem">
                                                                     <button type="button">외국계(외국 투자기업)</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="7" class="devCoTypeItem">
                                                                     <button type="button">국내 공공기관·공기업</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="8" class="devCoTypeItem">
                                                                     <button type="button">외국계(외국 법인기업)</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="9" class="devCoTypeItem">
                                                                     <button type="button">비영리단체·교육재단</button>
                                                                 </li>
-                                                                <li class="devCoTypeItem">
+                                                                <li data-type="10" class="devCoTypeItem">
                                                                     <button type="button">외국 기관·비영리기구</button>
                                                                 </li>
                                                                 <!-- javascript: 버튼 선택 시, 선택한 버튼에 on 추가 -->
@@ -214,8 +239,6 @@
                                                 </div>
                                                 <!-- javascript: 버튼 선택 시 on 추가, 입력 완료 시 ok 추가, 필수 정보를 입력하지 않을 시 error 추가 -->
                                             </div>
-
-
                                         </div>
 
                                         <div class="tbRow" id="devForeignCoArea" style="display:none;">
@@ -236,7 +259,7 @@
                                                             <!--// 검색 시 -->
                                                             <div class="keySchType">
                                                                 <ul id="devNationSearchResult">
-                                                                    <li><a class="devNationSearchItem" style="cursor:pointer"><strong></strong>가<strong></strong>나<strong></strong></a></li>
+                                                                    <!-- <li><a class="devNationSearchItem" style="cursor:pointer"><strong></strong>가<strong></strong>나<strong></strong></a></li> -->
                                                                 </ul>
                                                                 <!-- javascript: 처음엔 빈 리스트, input에 입력을 했다가 전부 지우면 li들 생성 -->
                                                             </div>
@@ -262,257 +285,260 @@
                                                             <!-- 선택한 text 들어갈 영역 -->
                                                             <span id="Industry_Name" class="txResult devTxResult"></span>
                                                         </button>
+                                                        <!-- server: 기본값이 있다면 value에 넣기(코드로) -->
+                                                        <input type="hidden" id="Industry_Code" name="Industry_Code" value="">
                                                         <!-- 레이어 영역 -->
                                                         <div class="lyElBx devLyElBx">
                                                             <div class="selTypeList">
+                                                                <!-- javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
                                                                 <ul>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10001">
                                                                         <button type="button">서비스업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10002">
                                                                         <button type="button">금융·은행업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10007">
                                                                         <button type="button">IT·정보통신업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10010">
                                                                         <button type="button">판매·유통업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10009">
                                                                         <button type="button">제조·생산·화학업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10011">
                                                                         <button type="button">교육업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10003">
                                                                         <button type="button">건설업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10004">
                                                                         <button type="button">의료·제약업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10005">
                                                                         <button type="button">미디어·광고업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10006">
                                                                         <button type="button">문화·예술·디자인업</button>
                                                                     </li>
-                                                                    <li class="devPartCtgr">
+                                                                    <li class="devPartCtgr" data-part-ctgr-code="10008">
                                                                         <button type="button">기관·협회</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <!-- javascript: 선택된 리스트가 있다면 devOn 추가(회원가입 때 선택한 업종) -->
+                                                                    <!-- javascript: 리스트안의 버튼 선택 시/선택된 경우 li에 on 추가 -->
+                                                                <ul class="devPartList " data-part-ctgr-code="10001" style="display:none">
+                                                                    <li data-part="1000001" class="devPartItem">
                                                                         <button type="button">호텔·여행·항공</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000003" class="devPartItem">
                                                                         <button type="button">음식료·외식·프랜차이즈</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000002" class="devPartItem">
                                                                         <button type="button">스포츠·여가·레저</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000004" class="devPartItem">
                                                                         <button type="button">뷰티·미용</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000005" class="devPartItem">
                                                                         <button type="button">콜센터·아웃소싱·기타</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000006" class="devPartItem">
                                                                         <button type="button">정비·A/S·카센터</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000007" class="devPartItem">
                                                                         <button type="button">렌탈·임대·리스</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000008" class="devPartItem">
                                                                         <button type="button">서치펌·헤드헌팅</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000009" class="devPartItem">
                                                                         <button type="button">시설관리·보안·경비</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000010" class="devPartItem">
                                                                         <button type="button">웨딩·상조·이벤트</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList " data-part-ctgr-code="10002" style="display:none">
+                                                                    <li data-part="1000011" class="devPartItem">
                                                                         <button type="button">은행·금융</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000012" class="devPartItem">
                                                                         <button type="button">캐피탈·대출</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000013" class="devPartItem">
                                                                         <button type="button">증권·보험·카드</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList " data-part-ctgr-code="10007" style="display:none">
+                                                                    <li data-part="1000038" class="devPartItem">
                                                                         <button type="button">솔루션·SI·CRM·ERP</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000039" class="devPartItem">
                                                                         <button type="button">웹에이전시</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000040" class="devPartItem">
                                                                         <button type="button">쇼핑몰·오픈마켓·소셜커머스</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000041" class="devPartItem">
                                                                         <button type="button">포털·컨텐츠·커뮤니티</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000042" class="devPartItem">
                                                                         <button type="button">네트워크·통신서비스</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000043" class="devPartItem">
                                                                         <button type="button">정보보안</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000044" class="devPartItem">
                                                                         <button type="button">컴퓨터·하드웨어·장비</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000045" class="devPartItem">
                                                                         <button type="button">게임·애니메이션</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000046" class="devPartItem">
                                                                         <button type="button">모바일·APP</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000047" class="devPartItem">
                                                                         <button type="button">IT컨설팅</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList " data-part-ctgr-code="10010" style="display:none">
+                                                                    <li data-part="1000016" class="devPartItem">
                                                                         <button type="button">백화점·유통·도소매</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000015" class="devPartItem">
                                                                         <button type="button">무역·상사</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000014" class="devPartItem">
                                                                         <button type="button">물류·운송·배송</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList " data-part-ctgr-code="10009" style="display:none">
+                                                                    <li data-part="1000052" class="devPartItem">
                                                                         <button type="button">전기·전자·제어</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000053" class="devPartItem">
                                                                         <button type="button">반도체·디스플레이·광학</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000054" class="devPartItem">
                                                                         <button type="button">기계·기계설비</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000055" class="devPartItem">
                                                                         <button type="button">자동차·조선·철강·항공</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000056" class="devPartItem">
                                                                         <button type="button">금속·재료·자재</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000057" class="devPartItem">
                                                                         <button type="button">화학·에너지·환경</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000058" class="devPartItem">
                                                                         <button type="button">섬유·의류·패션</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000059" class="devPartItem">
                                                                         <button type="button">생활화학·화장품</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000060" class="devPartItem">
                                                                         <button type="button">생활용품·소비재·기타</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000061" class="devPartItem">
                                                                         <button type="button">목재·제지·가구</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000062" class="devPartItem">
                                                                         <button type="button">식품가공</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000063" class="devPartItem">
                                                                         <button type="button">농축산·어업·임업</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList" data-part-ctgr-code="10011" style="display:none">
+                                                                    <li data-part="1000021" class="devPartItem">
                                                                         <button type="button">학교(초·중·고·대학·특수)</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000022" class="devPartItem">
                                                                         <button type="button">유아·유치원·어린이집</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000023" class="devPartItem">
                                                                         <button type="button">학원·어학원·교육원</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000024" class="devPartItem">
                                                                         <button type="button">학습지·방문교육</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList" data-part-ctgr-code="10003" style="display:none">
+                                                                    <li data-part="1000018" class="devPartItem">
                                                                         <button type="button">건축·설비·환경</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000019" class="devPartItem">
                                                                         <button type="button">건설·시공·토목·조경</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000020" class="devPartItem">
                                                                         <button type="button">인테리어·자재</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000017" class="devPartItem">
                                                                         <button type="button">부동산·중개·임대</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem">
+                                                                <ul class="devPartList " data-part-ctgr-code="10004" style="display:none">
+                                                                    <li data-part="1000026" class="devPartItem">
                                                                         <button type="button">의료(병원분류별)</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000027" class="devPartItem">
                                                                         <button type="button">의료(진료과별)</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000025" class="devPartItem">
                                                                         <button type="button">의료(간호·원무·상담)</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000028" class="devPartItem">
                                                                         <button type="button">제약·보건·바이오</button>
                                                                     </li>
-                                                                    <li class="devPartItem">
+                                                                    <li data-part="1000029" class="devPartItem">
                                                                         <button type="button">사회복지·요양</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem ">
+                                                                <ul class="devPartList " data-part-ctgr-code="10005" style="display:none">
+                                                                    <li data-part="1000030" class="devPartItem">
                                                                         <button type="button">방송·케이블·프로덕션</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000031" class="devPartItem">
                                                                         <button type="button">신문·잡지·언론사</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000032" class="devPartItem">
                                                                         <button type="button">광고·홍보·전시</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000033" class="devPartItem">
                                                                         <button type="button">영화·음반·배급</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000034" class="devPartItem">
                                                                         <button type="button">연예·엔터테인먼트</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000035" class="devPartItem">
                                                                         <button type="button">출판·인쇄·사진</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem ">
+                                                                <ul class="devPartList " data-part-ctgr-code="10006" style="display:none">
+                                                                    <li data-part="1000036" class="devPartItem">
                                                                         <button type="button">문화·공연·예술</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000037" class="devPartItem">
                                                                         <button type="button">디자인·CAD</button>
                                                                     </li>
                                                                 </ul>
-                                                                <ul class="devPartList">
-                                                                    <li class="devPartItem ">
+                                                                <ul class="devPartList " data-part-ctgr-code="10008" style="display:none">
+                                                                    <li data-part="1000048" class="devPartItem">
                                                                         <button type="button">공기업·공공기관</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000049" class="devPartItem">
                                                                         <button type="button">협회·단체</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000050" class="devPartItem">
                                                                         <button type="button">컨설팅·연구·조사</button>
                                                                     </li>
-                                                                    <li class="devPartItem ">
+                                                                    <li data-part="1000051" class="devPartItem">
                                                                         <button type="button">회계·세무·법무</button>
                                                                     </li>
                                                                 </ul>
-                                                                <!-- javascript: 리스트 선택 시 devOn 추가 -->
-                                                                    <!-- javascript: 리스트안의 버튼 선택 시 on 추가 -->
                                                             </div>
                                                             <p class="selTypeBtn">
                                                                 <button type="button" class="mtcBtnBd devLyClose">
@@ -567,19 +593,18 @@
                                                             </span>
                                                         </div>
                                                         <button type="button" class="btnSetFn" id="devSearchAddr">주소검색</button>
-                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- javascript: 국내 기업 선택 시, display: block; -->
-                                            <!-- javascript: 회사주소 선택중 클래스 on, 회사주소 선택 완료시 클래스 ok, 입력하지 않고 저장 버튼 누르면 error -->
+                                            <!-- javascript: 회사주소 선택 완료시 클래스 ok, 입력하지 않고 저장 버튼 누르면 error -->
 
                                             <div id="devForeignAddrArea" class="elWrap devElWrap" style="display: none;">
                                                 <div class="schInpType">
                                                     <label class="ph" for="devAddrForeign">회사주소</label>
                                                     <input type="text" id="devAddrForeign" class="inpDefault devAnimPh" name="Addr_Foreign" maxlength="150">
                                                     <span class="byte">
-                                                        <em id="devAddrForeignTextCnt">0</em>/70
+                                                        <em id="devAddrForeignTextCnt">0</em>/150
                                                     </span>
                                                 </div>
                                             </div>
@@ -587,27 +612,33 @@
                                             <!-- javascript: 회사주소 선택중 클래스 on, 회사주소 선택 완료시 클래스 ok -->
 
                                             <div class="lyAddrMng">
-                                                <div class="addrMngWrap on" id="devAddrMngWrap">
+                                                <div class="addrMngWrap" id="devAddrMngWrap">
                                                     <div id="frmAddr">
-                                                        <div class="popRecWrap popAddr addr">
+                                                        <div class="popRecWrap popAddr addr on">
                                                             <div class="popHd">
-                                                                <h1>주소 선택</h1>
+                                                                <h1>주소 검색</h1>
                                                             </div>
                                                             <div class="popCont">
-                                                                <input type="text" id="sample6_postcode" placeholder="우편번호">
-                                                                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                                                <input type="text" id="sample6_address" placeholder="주소"><br>
-                                                                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                                                                <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+                                                                <input type="text" id="postcode" placeholder="우편번호 *" maxlength="5">
+                                                                <input type="button" id="searchPostCodeBtn" value="우편번호 찾기">
+                                                                <input type="text" id="address" placeholder="주소 *">
+                                                                <input type="text" id="detailAddress" placeholder="상세주소">
+                                                                <input type="text" id="extraAddress" placeholder="참고항목">
                                                             </div>
-                                                            <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseAddr"></button>
+                                                            <p class="popFunc">
+                                                                <button type="button" class="mtcBtnBd devCloseAddr">
+                                                                    <span>취소</span>
+                                                                </button><button type="button" class="mtcBtnBg">
+                                                                    <span>확인</span>
+                                                                </button>
+                                                                <!-- javascript: 버튼 클릭 이벤트 -->
+                                                            </p>
+                                                            <button type="button" class="mtcBtn mtcBtnPopClose" id="devCloseAddrLayer"></button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <!-- javascript: 주소검색 선택 시 on 추가 -->
                                             </div>
-
-
 
                                         </div>
 
@@ -701,15 +732,12 @@
                                     <h3 class="info_hd_3">
                                         <label for="lb_welfare">복리후생</label>
                                     </h3>
-                                    <button type="button" class="btnSetFn" id="devGetLastWlfr">
-                                        <span>최신 공고의 복리후생 불러오기</span>
-                                    </button>
                                     <div class="WelfareType">
                                         <span class="ph" id="devEmptyList">복리후생을 선택 해 주세요.</span>
                                         <!-- javascript: 선택된 복리후생이 있다면 display: none -->
                                         <ul class="welfare-list" id="devWlfrList">
                                             <!-- <li>
-                                                <button type="button" class="devItemDel">임직원 할인</button>
+                                                <button type="button" class="devItemDel" data-item-code>임직원 할인</button>
                                             </li> -->
                                         </ul>
                                         <!-- javascript: 복리후생이 선택되면 ul에 li태그 동적으로 생성 -->
@@ -969,14 +997,14 @@
                                                         <div class="choiceArea">
                                                             <div class="choiceListArea">
                                                                 <div class="keywordListBx">
-                                                                    <ul class="subList devPreviewList" style="display: block;">
-                                                                        <li class="subItem">
+                                                                    <ul class="subList devPreviewList" style="display: none;">
+                                                                        <!-- <li class="subItem">
                                                                             <span class="inr">
-                                                                                <span class="devItemText">공무원연금</span><button type="button" class="spRegA btnItemDel"></button>
+                                                                                <span class="devItemText">공무원연금</span><button type="button" class="spRegA btnItemDel" data-item-code="31"></button> -->
                                                                                 <!-- javascript: 선택한 복리후생의 textContent가 들어가도록 -->
                                                                                 <!-- javascript: 버튼 누르면 선택된 복리후생 사라짐 -->
-                                                                            </span>
-                                                                        </li>
+                                                                            <!-- </span>
+                                                                        </li> -->
                                                                         <!-- javascript: 복리후생이 선택되면 ul에 li태그 동적으로 생성 -->
                                                                     </ul>
                                                                     <!-- javascript: 복리후생이 선택되면 display: block -->
@@ -1004,13 +1032,23 @@
                                                 </div>
                                                 <button type="button" class="btnModalClose spRegA"></button>
                                             </div>
-                                            <div class="modalBg">
-
-                                            </div>
+                                            <div class="modalBg"></div>
                                         </div>
                                         <!-- javascript: 버튼 눌렀을 때 display: block, opacity: 1  -->
                                         <!-- javascript: 버튼 눌렀을 때 body에 스타일 추가 width: 100%; height: 100%; position: fixed; top: -1200px; -->
                                     </div>
+                                    <div class="plus autoWlfrRegArea">
+                                        <span class="autoTitle">추천</span>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="77217">교통비</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="2">격주휴무</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="21">구내식당</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="94172">사내카페</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="99">수면실</button>
+                                        <button type="button" class="btnAutoReg devRcmdBtn" data-item-code="45">가족수당</button>
+                                        <!-- server: 아무거나 불러와서 채우기 -->
+                                    </div>
+                                    <p>· &nbsp;기업정보의 복리후생 정보만 업데이트 됩니다.</p>
+                                    <p>· &nbsp;공고에 노출되는 복리후생 정보는 해당 공고의 수정 페이지에서 업데이트해 주세요.</p>
                                 </div>
 
                                 <!-- 사진 업로드 -->
@@ -1028,42 +1066,27 @@
                                             </button>
                                             <!-- javascript: 사진 업로드 모달 -->
                                         </div>
-                                        <p class="upload-text-guide">
+                                        <!-- <p class="upload-text-guide">
                                             사진을 끌어다 순서를 변경하거나, 대표 사진으로 옮겨 놓을 수 있습니다.
-                                        </p>
+                                        </p> -->
                                         <!-- javascirpt: 사진 업로드 시 동적으로 생성됨 -->
                                         <ul id="devPhotoVideoList" class="sortable" style="position: static;">
-                                            <li class="thumbnail">
+                                            <!-- <li class="thumbnail">
                                                 <div class="thumb ok">
                                                     <img src="https://file2.jobkorea.co.kr/Company/Visual_Co/Image_Thumb_View_CoRead.asp?FN=2026\1\JK_CO_k0nFme926012215002321_150024.jpg&v=20260122150035&W=234&H=174">
                                                     <span class="btnFunc">
-                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>
-                                                    </span>
-                                                </div>
-                                                <div class="text-box">
-                                                    <fieldset>
-                                                        <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요."></textarea>
-                                                    </fieldset>
-                                                </div>
-                                                <!-- javascript: textarea focus 시 focus 추가 -->
-                                                <!-- javascript: textarea에 value가 있다면 has-value 추가 -->
-                                            </li>
-                                            <li class="thumbnail">
-                                                <div class="thumb ok">
-                                                    <img src="https://file2.jobkorea.co.kr/Company/Visual_Co/Image_Thumb_View_CoRead.asp?FN=2026\1\JK_CO_k0nFme926012215002321_150024.jpg&v=20260122150035&W=234&H=174">
-                                                    <span class="btnFunc">
-                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>
+                                                        <button type="button" class="mtcBtn mtcBtnDel_1 devDeletePhoto"></button>  -->
                                                         <!-- javascript: 버튼 클릭 시 alert으로 한 번 더 확인하고, 사진 지워짐 -->
-                                                    </span>
+                                                    <!-- </span>
                                                 </div>
                                                 <div class="text-box">
                                                     <fieldset>
                                                         <textarea name="photoVideoText" maxlength="25" title="사진/동영상 설명 입력" placeholder="클릭하여 설명을 입력하세요."></textarea>
                                                     </fieldset>
-                                                </div>
+                                                </div> -->
                                                 <!-- javascript: textarea focus 시 focus 추가 -->
                                                 <!-- javascript: textarea에 value가 있다면 has-value 추가 -->
-                                            </li>
+                                            <!-- </li> -->
                                             <!-- javascript: 사진을 업로드 시 동적으로 li태그 생성 -->
                                         </ul>
                                     </div>
@@ -1116,7 +1139,7 @@
                                                     <p class="popFunc">
                                                         <button type="button" class="mtcBtnBd devClosePhotoLive">
                                                             <span>취소</span>
-                                                        </button><button type="submit" class="mtcBtnBg">
+                                                        </button><button type="button" class="mtcBtnBg">
                                                             <span>확인</span>
                                                         </button>
                                                         <!-- javascript: 버튼 클릭 이벤트 -->
@@ -1158,5 +1181,6 @@
         </div>
     </div>
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/corporate/profile/event.js"></script>
 </html>
