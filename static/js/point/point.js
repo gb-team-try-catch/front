@@ -131,7 +131,7 @@ chargeButton.addEventListener("click", (e) => {
 
     // 총액 계산 (부가세 10% 포함)
     function calculateTotal(stars) {
-        return Math.floor(stars * 1.1);
+        return Math.floor(stars * 110);
     }
 
     // 총액 업데이트
@@ -160,26 +160,12 @@ chargeButton.addEventListener("click", (e) => {
     });
 
     // 10의자리 다 떨구기
-    chargeInput.addEventListener("input", (e) => {
-        // 콤마 제거하고 숫자만 추출
-        let inputValue =
-            parseInt(chargeInput.value.replace(/[^0-9]/, ""), 10) || 0;
-
-        if (inputValue) {
-            // 100 단위로 내림 (10의자리 버림)
-            let rounded = Math.floor(inputValue / 100) * 100;
-            chargeInput.value = rounded.toLocaleString("ko-KR");
-        } else {
-            const chargeBox = document.querySelector(".charge_box__djnS1");
-            // 이미 경고가 있으면 추가 안함
-            if (!chargeBox.querySelector(".charge_warning__WXx4e")) {
-                const div = document.createElement("div");
-                div.classList.add("charge_warning__WXx4e");
-                div.innerHTML = `충전할 치즈를 입력해주세요`;
-                chargeBox.appendChild(div);
-            }
-        }
-    });
+    // chargeInput.addEventListener("blur", (e) => {
+    //     let value = Number(e.target.value.replaceAll(",", ""));
+    //     const rest = value % 1000;
+    //     rest != 0 && (value = parseInt(value - rest));
+    //     e.target.value = value.toLocaleString("ko-KR");
+    // });
 
     // 입력 초기화
     deleteButton.addEventListener("click", (e) => {
