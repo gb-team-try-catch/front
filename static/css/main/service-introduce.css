@@ -1325,3 +1325,25 @@ div {
     box-shadow: none;
     border: none;
 }
+
+.section08 .container .section08_list .list_show .contents_box.active {
+    margin-top: 30px;
+    height: auto;
+    padding-right: 40px;
+}
+
+.section08 .container .section08_list .list_show .title_box .readme_open[data-states=open] {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.section04 .container .section04_swiper .recruitWrap .recruitList.recommandSwiper ul .listCell .rIcon.on, .section04 .container .section04_swiper .recruitWrap .recruitList.recommandSwiper ul .listCell .rIcon.str_on, .section04 .container .section04_swiper .recruitWrap .recruitList.recommandSwiper ul .listCell .rIcon .tplBtnScrOn {
+    width: 20px;
+    height: 19px;
+    background-image: url(https://i.jobkorea.kr/content/images/theme/celebrate/icon_str_on.svg);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
