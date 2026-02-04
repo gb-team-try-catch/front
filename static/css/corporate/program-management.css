@@ -254,8 +254,8 @@ div.mtcTplTab ul.tabItems li a {
 }
 div.mtcTplTab ul.tabItems li.on a {
     border: none;
-    border-bottom: 4px solid #39f;
-    color: #39f;
+    border-bottom: 4px solid #006e3f;
+    color: #006e3f;
 
     z-index: 2;
     background-color: #fff;
@@ -271,7 +271,7 @@ div.mtcTplTab ul.tabItems li a .verdana {
     vertical-align: inherit;
 }
 .mtcTplTab .tabItems li.on a .verdana {
-    color: #3399ff;
+    color: #006e3f;
     font-weight: normal;
 }
 div.mtcTplTab ul.tabItems li.on a .verdana {
@@ -583,7 +583,7 @@ div.noticeBx ul li:before {
     /* border: 1px solid rgba(0, 0, 0, 1); */
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, .1);
     /* border : 1px solid rgba(0, 0, 0, .0); */
-    border: 1px solid #5288ff;
+    border: 1px solid #006e3f;
 
 }
 /* .scSelectWrap .selectInner .scSelectAppList .scSelectAppItem:after {
